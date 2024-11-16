@@ -9,8 +9,10 @@ class Quiz
         vector<string> answers;
 
     public:
+        Quiz(vector<string>, vector<string>);
         void setQuestions();
         void setAnswers();
         string getQuestions();
         string getAnswers();
+        void test();
 };
