@@ -11,9 +11,10 @@ using namespace std;
 class Quiz 
 {
     private:
-        vector<Flashcards> flashcards;
+        static vector<Flashcards> flashcard;
 
     public:
+        static void addFlashcards();
         static void test();
         static void study();
 };
