@@ -1,6 +1,5 @@
 #include "flashcards.h"
 #include <string>
-#include <stdexcept>
 
 Flashcards::Flashcards(string q, string a)
 {
