@@ -9,5 +9,8 @@ class Quiz
         vector<string> answers;
 
     public:
-        
+        void setQuestions();
+        void setAnswers();
+        string getQuestions();
+        string getAnswers();
 };
