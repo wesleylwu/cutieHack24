@@ -4,6 +4,7 @@
 int main()
 {
     int choice;
+    Quiz flashcards;
     cout << "Welcome to our quiz maker!" << endl;
     cout << "(1) Add new flashcard" << endl;
     cout << "(2) Study flashcards" << endl;
@@ -15,11 +16,11 @@ int main()
     }
 
     if (choice == 1) {
-        addFlashcards();
+        flashcards.addFlashcards();
     }
 
     if (choice == 2) {
-        study();
+        flashcards.study();
     }
 
     if (choice == 3) {
