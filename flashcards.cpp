@@ -7,7 +7,6 @@ Flashcards::Flashcards(string q, string a)
     throw runtime_error("Flashcards constructor not implemented");
 }
 
-
 void Flashcards::setQuestions(string q)
 {
     throw runtime_error("setQuestions not implemented");

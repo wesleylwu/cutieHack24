@@ -2,7 +2,7 @@
 #include <string>
 #include <stdexcept>
 
-Quiz::Quiz()
+Quiz::Quiz(Flashcards cards)
 {
     throw runtime_error("Quiz constructor not implemented");
 }

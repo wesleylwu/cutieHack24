@@ -10,7 +10,7 @@ class Quiz
         vector<Flashcards> flashcards;
 
     public:
-        Quiz(Flashcard);
+        Quiz(Flashcards );
         void test();
         void study();
 };
