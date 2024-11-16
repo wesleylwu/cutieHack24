@@ -1,5 +1,4 @@
 #include "quiz.h"
-#include "flashcards.h"
 
 void Quiz::test()
 {
