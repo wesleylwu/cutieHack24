@@ -13,18 +13,26 @@ int main()
     while (choice != 1 || choice != 2 || choice != 3) {
         cout << "Invalid input. Please enter valid number.";
         cin >> choice;
+        cout << endl;
     }
 
-    if (choice == 1) {
-        flashcards.addFlashcards();
-    }
+    while (choice != 3)
+    {
+        if (choice == 1) {
+            flashcards.addFlashcards();
+        }
 
-    if (choice == 2) {
-        flashcards.study();
-    }
+        if (choice == 2) {
+            flashcards.study();
+        }
 
-    if (choice == 3) {
-        return 0;
+        if (choice == 3) {
+            return 0;
+        }
+        
+        cout << "Enter a number: ";
+        cin >> choice;
+        cout << endl;
     }
 
     return 0;
