@@ -25,6 +25,11 @@ void Quiz::addFlashcards() {
 
 void Quiz::removeFlashcards()
 {
+    if (flashcard.size() == 0)
+    {
+        cout << "There are currently no flashcards stored." << endl;
+        return;
+    }
     int num;
     vector<Flashcards> newFlashcards;
     cout << "What number flashcard would you like to remove? ";
