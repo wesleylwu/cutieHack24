@@ -1,19 +1,16 @@
 #include <iostream>
 #include <vector>
+#include "flashcards.h"
+
 using namespace std;
 
 class Quiz 
 {
     private:
-        vector<string> questions;
-        vector<string> answers;
+        vector<Flashcards> flashcards;
 
     public:
-        Quiz(vector<string>, vector<string>);
-        void setQuestions();
-        void setAnswers();
-        string getQuestions();
-        string getAnswers();
+        Quiz(Flashcard);
         void test();
         void study();
 };
