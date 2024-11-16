@@ -1,15 +1,8 @@
 #include "quiz.h"
-#include <string>
-#include <stdexcept>
-
-Quiz::Quiz(Flashcards cards)
-{
-    throw runtime_error("Quiz constructor not implemented");
-}
 
 void Quiz::test()
 {
-    throw runtime_error("test not implemented");
+    srand(time(0));
 }
 
 void Quiz::study()

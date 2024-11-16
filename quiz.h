@@ -1,5 +1,9 @@
 #include <iostream>
 #include <vector>
+#include <string>
+#include <stdexcept>
+#include <ctime>
+#include <cstdlib>
 #include "flashcards.h"
 
 using namespace std;
@@ -10,7 +14,6 @@ class Quiz
         vector<Flashcards> flashcards;
 
     public:
-        Quiz(Flashcards );
-        void test();
-        void study();
+        static void test();
+        static void study();
 };
