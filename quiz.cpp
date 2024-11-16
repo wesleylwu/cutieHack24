@@ -22,11 +22,12 @@ void Quiz::test()
 
 
         Flashcards used =flashcard[randIndex];
+        int usingIndex=randIndex;
         cout << i+1 <<". " << used.getQuestions() << endl;//print out question
         if(isSentence(used.getAnswers())){//if sentence, multiple choice
             vector<string> answerChoice;
             vector<int> answerChoiceIndex;
-            for(int k = 0;k<3;i++){
+            for(int k = 0; k<3; k++){
                 while(flag){//find random index not repeating
                     flag=false;
                     randIndex = rand()%flashcard.size();
@@ -44,8 +45,8 @@ void Quiz::test()
             flag=true;
             while(flag){
                 flag=false;
-                for(int k=1;k<=4;k++){
-                    cout << endl << k << ". " << answerChoice[k] << endl;
+                for(int k=0; k<4; k++){
+                    cout << endl << k+1 << ". " << answerChoice[k] << endl;
                 }
                 cout << "Enter the number that you think it is correct." << endl;
                 int answer;
@@ -62,9 +63,22 @@ void Quiz::test()
             string answer;
             cout << "\nEnter your answer: " << endl;
             cin >> answer;
+            if(answer == used.getAnswers()){
+                cout << "Correct!" << endl;
+            }
+            else{
+                cout << "Incorrect!" << endl;
+                i--;
+                for(int k=0;k<indexUsed.size();k++){
+                    if(indexUsed.at(k)==usingIndex){
+                        indexUsed.erase(indexUsed.begin()+k);
+                    }
+                }
+            }
         }
     }
 }
+
 bool Quiz::isSentence(string str){
     int unsigned start =0, end=str.length()-1; 
     while (start < str.length() && isspace(str[start])) {
