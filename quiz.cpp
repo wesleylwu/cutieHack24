@@ -124,11 +124,18 @@ void Quiz::removeFlashcards()
         cout << "There are currently no flashcards stored." << endl;
         return;
     }
+
     int num;
     vector<Flashcards> newFlashcards;
     cout << "What number flashcard would you like to remove? ";
 
     cin >> num;
+    if (num >= flashcard.size())
+    {
+        cout << endl;
+        cout << "Invalid number. Try again: ";
+        cin >> num;
+    }
     num -= 1;
 
     cout << endl;
@@ -149,6 +156,6 @@ void Quiz::displayAllFlashcards()
     for (int i = 0; i < flashcard.size(); ++i)
     {
         cout << i + 1 << ". ";
-        cout << "Q: " << flashcard.at(0).getQuestions() << " A: " << flashcard.at(0).getAnswers() << endl;
+        cout << "Q: " << flashcard.at(i).getQuestions() << " A: " << flashcard.at(i).getAnswers() << endl;
     }
 }

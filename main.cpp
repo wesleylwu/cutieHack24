@@ -14,7 +14,8 @@ int main()
         cout << "(2) Remove flashcard" << endl;
         cout << "(3) Study flashcards" << endl;
         cout << "(4) Test flashcards" << endl;
-        cout << "(5) Exit Program" << endl;
+        cout << "(5) Display flashcards" << endl;
+        cout << "(6) Exit Program" << endl;
         cout << "Enter a number choice: ";
         cin >> choice;
         cout << endl;
@@ -36,6 +37,10 @@ int main()
         }
 
         else if (choice == 5) {
+            flashcards.displayAllFlashcards();
+        }
+
+        else if (choice == 6) {
             return 0;
         }
 
