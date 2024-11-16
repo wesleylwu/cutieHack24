@@ -14,6 +14,7 @@ class Quiz
         vector<Flashcards> flashcard;
 
     public:
+        bool isSentence(string );
         void addFlashcards();
         void removeFlashcards();
         void displayAllFlashcards();
