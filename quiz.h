@@ -15,6 +15,8 @@ class Quiz
 
     public:
         static void addFlashcards();
+        static void removeFlashcards();
+        static void displayAllFlashcards();
         static void test();
         static void study();
 };
