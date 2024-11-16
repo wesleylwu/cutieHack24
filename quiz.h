@@ -11,12 +11,12 @@ using namespace std;
 class Quiz 
 {
     private:
-        static vector<Flashcards> flashcard;
+        vector<Flashcards> flashcard;
 
     public:
-        static void addFlashcards();
-        static void removeFlashcards();
-        static void displayAllFlashcards();
-        static void test();
-        static void study();
+        void addFlashcards();
+        void removeFlashcards();
+        void displayAllFlashcards();
+        void test();
+        void study();
 };

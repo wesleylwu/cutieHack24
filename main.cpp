@@ -4,6 +4,7 @@
 int main()
 {
     int choice;
+    Quiz flashcards;
     cout << "Welcome to our quiz maker!" << endl << endl;
 
     while (choice != 3)
@@ -13,18 +14,20 @@ int main()
         cout << "(2) Remove flashcard" << endl;
         cout << "(3) Study flashcards" << endl;
         cout << "(4) Exit Program" << endl;
+        cout << "Enter a number choice: ";
         cin >> choice;
+        cout << endl;
 
         if (choice == 1) {
-            Quiz::addFlashcards();
+            flashcards.addFlashcards();
         }
 
         else if (choice == 2) {
-            Quiz::removeFlashcards();
+            flashcards.removeFlashcards();
         }
         
         else if (choice == 3) {
-            Quiz::study();
+            flashcards.study();
         }
 
         else if (choice == 4) {
@@ -32,8 +35,10 @@ int main()
         }
 
         else {
-            cout << "Invalid input. Please enter valid number: " << endl << endl;
+            cout << "Invalid input. Please enter valid number: " << endl;
         }
+
+        cout << endl;
     }
 
     return 0;
