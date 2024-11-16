@@ -5,8 +5,8 @@ using namespace std;
 class Flashcards
 {
     private:
-        string questions;
-        string answers;
+        string question;
+        string answer;
     public:
         Flashcards(string, string);
         void setQuestions(string);

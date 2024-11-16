@@ -4,25 +4,26 @@
 
 Flashcards::Flashcards(string q, string a)
 {
-    throw runtime_error("Flashcards constructor not implemented");
+    question = q;
+    answer = a;
 }
 
 void Flashcards::setQuestions(string q)
 {
-    throw runtime_error("setQuestions not implemented");
+    question = q;
 }
 
 void Flashcards::setAnswers(string a)
 {
-    throw runtime_error("setAnswers not implemented");
+    answer = a;
 }
 
 string Flashcards::getQuestions()
 {
-    throw runtime_error("getQuestions not implemented");
+    return question;
 }
 
 string Flashcards::getAnswers()
 {
-    throw runtime_error("getAnswers not implemented");
+    return answer;
 }
