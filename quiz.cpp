@@ -31,3 +31,8 @@ void Quiz::test()
 {
     throw runtime_error("test not implemented");
 }
+
+void Quiz::study()
+{
+    throw runtime_error("study not implemented");
+}

@@ -15,4 +15,5 @@ class Quiz
         string getQuestions();
         string getAnswers();
         void test();
+        void study();
 };
