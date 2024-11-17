@@ -294,7 +294,7 @@ void Quiz::removeFlashcardHelper(vector<Flashcards> &fc1, vector<Flashcards> &fc
         }
         else
         {
-            fc2.push_back(flashcard.at(i));
+            fc2.push_back(fc1.at(i));
         }
     }
 
