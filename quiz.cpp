@@ -129,7 +129,134 @@ void Quiz::addFlashcards() {
 }
 
 void Quiz::study() {
-    cout << "asjdhf" << endl;
+    int num;
+    int numChoice;
+    char category;
+    string answer;
+    bool choice = true;
+    bool cont = true;
+    vector<Flashcards> previousCards;
+    vector<Flashcards> remainingCards;
+    remainingCards = flashcard;
+
+    while (cont)
+    {
+        cout << "Remaining questions not studied: " << endl << endl;
+        displayQuestions(remainingCards);
+        cout << "Previous questions studied: " << endl;
+        displayQuestions(previousCards);
+        cout << endl;
+
+        cout << "Select the category of questions you would like to study (R or P): ";
+        cin >> category;
+
+        while (category != 'R' && category != 'r' && category != 'P' && category && 'p')
+        {
+            cout << "Invalid category. Try again: ";
+            cin >> category;
+            cout << endl;
+        }
+
+        cout << "Select the number card you would like to study : ";
+        cin >> num;
+        num -= 1;
+
+        if (category == 'R' || category == 'r')
+        {
+            while (num < 0 || num >= remainingCards.size())
+            {
+                cout << "Invalid number. Try again: ";
+                cin >> num;
+                num -=1;
+                cout << endl;
+            }
+        }
+
+        else if (category == 'P' || category == 'p')
+        {
+            while (num < 0 || num >= remainingCards.size())
+            {
+                cout << "Invalid number. Try again: ";
+                cin >> num;
+                num -= 1;
+                cout << endl;
+            }
+        }
+        
+        if (category == 'R' || category == 'r')
+        {
+            cout << remainingCards.at(num).getQuestions() << endl;
+            while (choice)
+            {
+                cout << "Enter your answer: ";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                getline(cin, answer);
+                if (answer == remainingCards.at(num).getAnswers())
+                {
+                    cout << "Correct!" << endl;
+                }
+                else 
+                {
+                    cout << "Incorrect. Try again." << endl;
+                }
+                cout << "Type 1 to go back to questions or another key to try again: " << endl;
+                cin >> numChoice;
+                if (numChoice == 1)
+                {
+                    choice = false;
+                    removeFlashcardHelper(remainingCards, num);
+                }
+            }
+        }
+        if (category == 'P' || category == 'p')
+        {
+            cout << previousCards.at(num).getQuestions() << endl;
+            while (choice)
+            {
+                cout << "Enter your answer: ";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                getline(cin, answer);
+                if (answer == previousCards.at(num).getAnswers())
+                {
+                    cout << "Correct!" << endl;
+                }
+                else 
+                {
+                    cout << "Incorrect. Try again." << endl;
+                }
+                cout << "Type 1 to go back to questions or another key to try again: " << endl;
+                cin >> numChoice;
+                if (numChoice == 1)
+                {
+                    choice = false;
+                }
+            }
+        }
+
+        cout << "Type 1 to exit back to menu: " << endl;
+        cin >> numChoice;
+        if (numChoice == 1)
+        {
+            cont = false;
+        }
+    }
+}
+
+void Quiz::removeFlashcardHelper(vector<Flashcards> &fc, int n)
+{
+    vector<Flashcards> newFlashcards;
+
+    for (int i = 0; i < fc.size(); ++i)
+    {
+        if (n != i)
+        {
+            newFlashcards.push_back(flashcard.at(i));
+        }
+    }
+
+    fc = newFlashcards;
 }
 
 void Quiz::removeFlashcards()
@@ -173,4 +300,21 @@ void Quiz::displayAllFlashcards()
         cout << i + 1 << ". ";
         cout << "Q: " << flashcard.at(i).getQuestions() << "\n   A: " << flashcard.at(i).getAnswers() << endl;
     }
+}
+
+int Quiz::displayQuestions(vector<Flashcards> cards)
+{
+    if (cards.size() == 0)
+    {
+        cout << "None" << endl;
+        return 1;
+    }
+
+    for (int i = 0; i < cards.size(); ++i)
+    {
+        cout << i + 1 << ". ";
+        cout << "Q: " << cards.at(i).getQuestions() << endl;
+    }
+
+    return 0;
 }
