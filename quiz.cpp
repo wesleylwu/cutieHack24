@@ -298,7 +298,7 @@ void Quiz::displayAllFlashcards()
     for (int i = 0; i < flashcard.size(); ++i)
     {
         cout << i + 1 << ". ";
-        cout << "Q: " << flashcard.at(i).getQuestions() << "\n   A: " << flashcard.at(i).getAnswers() << endl;
+        cout << "Q: " << flashcard.at(i).getQuestions() << "\n A: " << flashcard.at(i).getAnswers() << endl;
     }
 }
 
