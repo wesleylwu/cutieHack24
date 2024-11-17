@@ -24,8 +24,8 @@ void Quiz::test()
 
        Flashcards used = flashcard[randIndex];
        int usingIndex=randIndex;
-       cout << i+1 <<". " << used.getQuestions() << endl;//print out question
-       if (isSentence(used.getAnswers())) { // If it's a sentence (multiple-choice)
+       cout << i+1 <<". " << used.getQuestions() << endl;
+       if (isSentence(used.getAnswers())) { 
            if(flashcard.size()<4){
                string stringAnswer;
                cout << "\nEnter your answer: " << endl;
@@ -46,25 +46,18 @@ void Quiz::test()
            else{
                vector<string> answerChoice;
                unordered_set<int> usedIndices;
-               usedIndices.insert(randIndex); // Add the correct index to exclude it
-
-
-               // Generate 3 unique incorrect answers
+               usedIndices.insert(randIndex); 
                while (answerChoice.size() < 3) {
                    int incorrectIndex = rand() % flashcard.size();
-                   if (usedIndices.find(incorrectIndex) == usedIndices.end()) { // Ensure uniqueness
+                   if (usedIndices.find(incorrectIndex) == usedIndices.end()) { 
                        answerChoice.push_back(flashcard[incorrectIndex].getAnswers());
                        usedIndices.insert(incorrectIndex);
                    }
                }
 
-
-               // Randomly insert the correct answer
                int correctPosition = rand() % 4;
                answerChoice.insert(answerChoice.begin() + correctPosition, used.getAnswers());
 
-
-               // Display options and get the user's answer
                int userChoice;
                bool validInput = false;
                while (!validInput) {
@@ -85,13 +78,12 @@ void Quiz::test()
                }
 
 
-               // Check the answer
                if (answerChoice[userChoice - 1] == used.getAnswers()) {
                    cout << "Correct!" << endl;
                } else {
                    cout << "Incorrect!" << endl;
-                   i--; // Repeat this question
-                   indexUsed.pop_back(); // Remove it from used indices
+                   i--; 
+                   indexUsed.pop_back(); 
                }
            }
        }
@@ -293,7 +285,7 @@ void Quiz::study() {
 void Quiz::removeFlashcardHelper(vector<Flashcards> &fc1, vector<Flashcards> &fc2, int n)
 {
     vector<Flashcards> newFlashcards;
-
+    
     for (int i = 0; i < fc1.size(); ++i)
     {
         if (n != i)
@@ -325,6 +317,8 @@ void Quiz::removeFlashcards()
     if (num >= flashcard.size())
     {
         cout << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Invalid number. Try again: ";
         cin >> num;
     }
