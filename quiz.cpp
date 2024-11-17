@@ -1,98 +1,121 @@
 #include "quiz.h"
+#include <unordered_set>
 
 void Quiz::test()
 {
-    srand(time(0));
-    vector<int> indexUsed;
-    string stringAnswer;
-    int randIndex;
-    bool flag = true;
-    for(int i=0;i<flashcard.size();i++){//for every questions
-        flag = true;
-        while(flag){//find random index not repeating
-            flag=false;
-            randIndex = rand()%flashcard.size();
-            for(int j=0;j<indexUsed.size();j++){
-                if(indexUsed.at(j)==randIndex){
-                    flag=true;
-                }
-            }
-        }
-        indexUsed.push_back(randIndex);
+   srand(time(0));
+   vector<int> indexUsed;
+   string stringAnswer;
+   int randIndex;
+   bool flag = true;
+   for(int i=0;i<flashcard.size();i++){//for every questions
+       flag = true;
+       while(flag){//find random index not repeating
+           flag=false;
+           randIndex = rand()%flashcard.size();
+           for(int j=0;j<indexUsed.size();j++){
+               if(indexUsed.at(j)==randIndex){
+                   flag=true;
+               }
+           }
+       }
+       indexUsed.push_back(randIndex);
 
 
-        Flashcards used = flashcard[randIndex];
-        int usingIndex=randIndex;
-        cout << i+1 <<". " << used.getQuestions() << endl;//print out question
-        if(isSentence(used.getAnswers())){//if sentence, multiple choice
-            vector<string> answerChoice;
-            vector<int> answerChoiceIndex;
-            for(int k = 0; k<3; k++){
-                while(flag){//find random index not repeating
-                    flag=false;
-                    randIndex = rand()%flashcard.size();
-                    for(int j=0;j<answerChoiceIndex.size();j++){
-                        if(answerChoiceIndex.at(j) == randIndex || used.getQuestions()==flashcard[randIndex].getQuestions()){
-                            flag=true;
-                        }
-                    }
-                }
-                answerChoice.push_back(flashcard[randIndex].getAnswers());
-            }
+       Flashcards used = flashcard[randIndex];
+       int usingIndex=randIndex;
+       cout << i+1 <<". " << used.getQuestions() << endl;//print out question
+       if (isSentence(used.getAnswers())) { // If it's a sentence (multiple-choice)
+           if(flashcard.size()<4){
+               string stringAnswer;
+               cout << "\nEnter your answer: " << endl;
+               getline(cin, stringAnswer);
+               if(stringAnswer == used.getAnswers()){
+                   cout << "Correct!" << endl;
+               }
+               else{
+                   cout << "Incorrect!" << endl;
+                   i--;
+                   for(int k=0;k<indexUsed.size();k++){
+                       if(indexUsed.at(k)==usingIndex){
+                           indexUsed.erase(indexUsed.begin()+k);
+                       }
+                   }
+               }
+           }
+           else{
+               vector<string> answerChoice;
+               unordered_set<int> usedIndices;
+               usedIndices.insert(randIndex); // Add the correct index to exclude it
 
-            randIndex=rand()%4;
-            answerChoice.insert(answerChoice.begin()+randIndex,used.getAnswers());
-            flag=true;
-            while(flag){
-                flag=false;
-                for(int k=0; k<4; k++){
-                    cout << endl << k+1 << ". " << answerChoice[k] << endl;
-                }
-                cout << "Enter the number that you think it is correct." << endl;
-                int intAnswer;
-                cin >> intAnswer;
-                if(cin.fail() || 1 > intAnswer || 4 < intAnswer){
-                    cout << "\nInvalid Input\n" << endl;
-                    cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                    flag=true;
-                }
 
-                if(answerChoice[intAnswer-1] == used.getAnswers()){
-                cout << "Correct!" << endl;
-                }
-                else{
-                cout << "Incorrect!" << endl;
-                i--;
-                for(int k=0;k<indexUsed.size();k++){
-                    if(indexUsed.at(k)==usingIndex){
-                        indexUsed.erase(indexUsed.begin()+k);
-                    }
-                }
-                }
-            }
+               // Generate 3 unique incorrect answers
+               while (answerChoice.size() < 3) {
+                   int incorrectIndex = rand() % flashcard.size();
+                   if (usedIndices.find(incorrectIndex) == usedIndices.end()) { // Ensure uniqueness
+                       answerChoice.push_back(flashcard[incorrectIndex].getAnswers());
+                       usedIndices.insert(incorrectIndex);
+                   }
+               }
 
-            
-        }
-        else{//if word or number, type it out
-            string stringAnswer;
-            cout << "\nEnter your answer: " << endl;
-            cin >> stringAnswer;
-            if(stringAnswer == used.getAnswers()){
-                cout << "Correct!" << endl;
-            }
-            else{
-                cout << "Incorrect!" << endl;
-                i--;
-                for(int k=0;k<indexUsed.size();k++){
-                    if(indexUsed.at(k)==usingIndex){
-                        indexUsed.erase(indexUsed.begin()+k);
-                    }
-                }
-            }
-        }
-    }
+
+               // Randomly insert the correct answer
+               int correctPosition = rand() % 4;
+               answerChoice.insert(answerChoice.begin() + correctPosition, used.getAnswers());
+
+
+               // Display options and get the user's answer
+               int userChoice;
+               bool validInput = false;
+               while (!validInput) {
+                   for (int k = 0; k < 4; k++) {
+                       cout << k + 1 << ". " << answerChoice[k] << endl;
+                   }
+                   cout << "Enter the number of the correct answer: ";
+                   cin >> userChoice;
+
+
+                   if (cin.fail() || userChoice < 1 || userChoice > 4) {
+                       cout << "\nInvalid input. Please try again.\n" << endl;
+                       cin.clear();
+                       cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                   } else {
+                       validInput = true;
+                   }
+               }
+
+
+               // Check the answer
+               if (answerChoice[userChoice - 1] == used.getAnswers()) {
+                   cout << "Correct!" << endl;
+               } else {
+                   cout << "Incorrect!" << endl;
+                   i--; // Repeat this question
+                   indexUsed.pop_back(); // Remove it from used indices
+               }
+           }
+       }
+       else{ //if word or number, type it out
+           string stringAnswer;
+           cout << "\nEnter your answer: " << endl;
+           cin >> stringAnswer;
+           if(stringAnswer == used.getAnswers()){
+               cout << "Correct!" << endl;
+           }
+           else{
+               cout << "Incorrect!" << endl;
+               i--;
+               for(int k=0;k<indexUsed.size();k++){
+                   if(indexUsed.at(k)==usingIndex){
+                       indexUsed.erase(indexUsed.begin()+k);
+                   }
+               }
+           }
+       }
+   }
 }
+
+
 
 bool Quiz::isSentence(string str){
     int unsigned start =0, end=str.length()-1; 
