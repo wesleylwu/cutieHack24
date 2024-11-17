@@ -19,6 +19,7 @@ class Quiz
         void removeFlashcards();
         void removeFlashcardHelper(vector<Flashcards> &, vector<Flashcards> &, int);
         void displayAllFlashcards();
+        bool displayQuestions(vector<Flashcards>);
         vector<Flashcards> getList();
         void setList(Flashcards);
         void test();

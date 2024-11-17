@@ -352,6 +352,23 @@ void Quiz::displayAllFlashcards()
     }
 }
 
+bool Quiz::displayQuestions(vector<Flashcards> cards)
+{
+    if (cards.size() == 0)
+    {
+        cout << "None" << endl;
+        return true;
+    }
+
+    for (int i = 0; i < cards.size(); ++i)
+    {
+        cout << i + 1 << ". ";
+        cout << "Q: " << cards.at(i).getQuestions() << endl;
+    }
+
+    return false;
+}
+
 vector<Flashcards> Quiz::getList()
 {
     return flashcard;
