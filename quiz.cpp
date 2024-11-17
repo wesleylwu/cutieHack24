@@ -4,7 +4,7 @@ void Quiz::test()
 {
     srand(time(0));
     vector<int> indexUsed;
-    string answer;
+    string stringAnswer;
     int randIndex;
     bool flag = true;
     for(int i=0;i<flashcard.size();i++){//for every questions
@@ -21,7 +21,7 @@ void Quiz::test()
         indexUsed.push_back(randIndex);
 
 
-        Flashcards used =flashcard[randIndex];
+        Flashcards used = flashcard[randIndex];
         int usingIndex=randIndex;
         cout << i+1 <<". " << used.getQuestions() << endl;//print out question
         if(isSentence(used.getAnswers())){//if sentence, multiple choice
@@ -49,21 +49,36 @@ void Quiz::test()
                     cout << endl << k+1 << ". " << answerChoice[k] << endl;
                 }
                 cout << "Enter the number that you think it is correct." << endl;
-                int answer;
-                cin >> answer;
-                if(cin.fail() || 1 > answer || 4 < answer){
+                int intAnswer;
+                cin >> intAnswer;
+                if(cin.fail() || 1 > intAnswer || 4 < intAnswer){
                     cout << "\nInvalid Input\n" << endl;
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     flag=true;
                 }
+
+                if(answerChoice[intAnswer-1] == used.getAnswers()){
+                cout << "Correct!" << endl;
+                }
+                else{
+                cout << "Incorrect!" << endl;
+                i--;
+                for(int k=0;k<indexUsed.size();k++){
+                    if(indexUsed.at(k)==usingIndex){
+                        indexUsed.erase(indexUsed.begin()+k);
+                    }
+                }
+                }
             }
+
+            
         }
         else{//if word or number, type it out
-            string answer;
+            string stringAnswer;
             cout << "\nEnter your answer: " << endl;
-            cin >> answer;
-            if(answer == used.getAnswers()){
+            cin >> stringAnswer;
+            if(stringAnswer == used.getAnswers()){
                 cout << "Correct!" << endl;
             }
             else{
