@@ -7,7 +7,7 @@ int main()
     Quiz flashcards;
     cout << "Welcome to our quiz maker!" << endl << endl;
 
-    while (choice != 3)
+    while (true)
     {
         cout << "Options:" << endl;
         cout << "(1) Add new flashcard" << endl;

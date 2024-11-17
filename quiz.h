@@ -17,7 +17,9 @@ class Quiz
         bool isSentence(string );
         void addFlashcards();
         void removeFlashcards();
+        void removeFlashcardHelper(vector<Flashcards> &, int);
         void displayAllFlashcards();
+        int displayQuestions(vector<Flashcards>);
         void test();
         void study();
 };
